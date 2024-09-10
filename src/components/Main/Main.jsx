@@ -16,7 +16,7 @@ const Main = () => {
             {!showResult?
             <>
             <div className="greet">
-                <p><span>Hello, Dev.</span></p>
+                <p><span>Hello,Aastha Arora.</span></p>
                 <p>How can I help you today?</p>
             </div>
             <div className="cards">
@@ -51,7 +51,12 @@ const Main = () => {
                         <hr/>
                         <hr/>
                     </div>
-                    :<p dangerouslySetInnerHTML={{__html:resultData}}></p>
+                    :resultData.split('\n').map((line, index) => (
+                        <p 
+                key={index} 
+                dangerouslySetInnerHTML={{ __html: line.replace(/^##\s*/, '') }}  // Remove '##' at the start of the line
+            ></p>
+                    ))
                     }
                 </div>
                 </div>
@@ -63,7 +68,7 @@ const Main = () => {
                     <div>
                         <img src={assets.gallery_icon} alt="" />
                         <img src={assets.mic_icon} alt="" />
-                        <img onClick={()=>onSent()} src={assets.send_icon} alt="" />
+                        {input?<img onClick={()=>onSent()} src={assets.send_icon} alt="" />:null}
                     </div>
                 </div>
                 <p className="bottom-info">
